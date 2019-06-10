@@ -11,5 +11,6 @@ setup(
     description='',
     install_requires=[
         'pyyaml',
+        'docker-compose',
     ],
 )
