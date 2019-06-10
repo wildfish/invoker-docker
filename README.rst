@@ -23,4 +23,4 @@ Parameters
 * ``docker_managed_services``: The names of the services to use when building
   and publishing images
 * ``docker_compose_test_services``: A set of services and commands to run when
-  testing (default: ``{'test': null}``)
+  testing (default: ``{'test': []}``)

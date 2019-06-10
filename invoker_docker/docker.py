@@ -81,13 +81,18 @@ def push(ctx, _build=True, label=None):
     'build': 'Flag whether build the image before publishing',
 })
 def test(ctx, _build=True):
-    test_services = ctx.get('docker_compose_test_services', {'test': None})
+    test_services = ctx.get('docker_compose_test_services', {'test': []})
 
     if _build:
         build(ctx)
 
-    for svc, cmd in test_services:
-        docker_compose_run(ctx, 'run --rm {} {}'.format(
-            svc,
-            cmd if cmd else '',
-        ))
+    for svc, cmds in test_services.items():
+        if cmds and len(cmds) > 0:
+            for cmd in cmds:
+                docker_compose_run(ctx, 'run --rm {} {}'.format(
+                    svc,
+                    cmd if cmd else '',
+                ))
+        else:
+            docker_compose_run(ctx, 'run --rm {}'.format(svc))
+
