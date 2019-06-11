@@ -65,7 +65,7 @@ def push(ctx, _build=True, label=None):
     if _build:
         build(ctx, label=label)
 
-    managed_services = ctx.get['docker_managed_services']
+    managed_services = ctx.get('docker_managed_services', [])
 
     if label:
         for svc, image in get_service_images(ctx, managed_services):
